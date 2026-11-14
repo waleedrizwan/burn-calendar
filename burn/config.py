@@ -27,3 +27,9 @@ API_SOURCES = {"MODIS": "modis", "VIIRS_SNPP": "viirs-snpp", "VIIRS_NOAA20": "vi
 CURRENT_YEAR = 2026
 BOUNDARIES = RAW / "boundaries" / "ne_10m_admin_0_countries.geojson"
 HOTSPOTS = PROCESSED / "hotspots"  # Parquet, partitioned region=/source=/year=
+
+# Gridding (BURN-007). Cell index: ix = floor(longitude / GRID_DEG), iy = floor(latitude / GRID_DEG).
+GRID_DEG = 0.1
+CELLDAY = PROCESSED / "cellday"      # Parquet, partitioned region=/year=
+STATIC_DEG = 0.01                    # cell size of the static-source mask
+STATIC_MIN = 3                       # type 2/3 detections needed to mark a cell as static

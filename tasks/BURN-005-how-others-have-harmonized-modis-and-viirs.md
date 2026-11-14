@@ -5,7 +5,7 @@ type: research
 priority: must
 requirement: 2. The number must be comparable over time
 timebox: 30m
-status: todo
+status: done
 depends:
 ---
 
@@ -23,7 +23,11 @@ Review published work on MODIS to VIIRS active fire continuity. Candidate famili
 
 ## Acceptance criteria
 
-- [ ] At least two approaches are summarized with source links
-- [ ] Each has its data needs, complexity and failure modes listed
-- [ ] One approach is recommended that fits the time available (see BURN-020)
-- [ ] The summary is saved in `docs/harmonization-options.md`
+- [x] At least two approaches are summarized with source links
+- [x] Each has its data needs, complexity and failure modes listed
+- [x] One approach is recommended that fits the time available (see BURN-020)
+- [x] The summary is saved in `docs/harmonization-options.md`
+
+## Outcome (Sat Nov 14)
+
+Written in [`docs/harmonization-options.md`](../docs/harmonization-options.md). Recommendation: active 0.1 degree cell-days, then multiplicative factors fitted on the 2012 to 2021 overlap.

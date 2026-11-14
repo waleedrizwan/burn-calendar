@@ -5,7 +5,7 @@ type: research
 priority: must
 requirement: 2. The number must be comparable over time
 timebox: 1h
-status: todo
+status: done
 depends: BURN-002, BURN-011
 ---
 
@@ -23,7 +23,11 @@ For each pilot region, compare MODIS and VIIRS activity over the overlap years u
 
 ## Acceptance criteria
 
-- [ ] Plots are saved per pilot region and candidate unit
-- [ ] The stability of the MODIS to VIIRS relationship across seasons and years is reported for each candidate
-- [ ] The candidate with the most stable relationship is identified
-- [ ] The notebook or script is committed
+- [x] Plots are saved per pilot region and candidate unit
+- [x] The stability of the MODIS to VIIRS relationship across seasons and years is reported for each candidate
+- [x] The candidate with the most stable relationship is identified
+- [x] The notebook or script is committed
+
+## Outcome (Sat Nov 14)
+
+Written in [`docs/overlap-exploration.md`](../docs/overlap-exploration.md). Most stable unit: active cell-days on the 0.1 degree grid (Canada CV across years 7.4% against 16.2% for raw counts). Script `analysis/explore_overlap.py`, plots in `docs/figures/`.
