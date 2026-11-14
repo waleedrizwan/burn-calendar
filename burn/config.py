@@ -33,3 +33,18 @@ GRID_DEG = 0.1
 CELLDAY = PROCESSED / "cellday"      # Parquet, partitioned region=/year=
 STATIC_DEG = 0.01                    # cell size of the static-source mask
 STATIC_MIN = 3                       # type 2/3 detections needed to mark a cell as static
+
+# Harmonization (docs/unit-decision.md). Version the parameters: change VERSION when any of these change.
+HARMONIZED = PROCESSED / "harmonized"   # Parquet, partitioned region=/year=
+PARAMS_FILE = ROOT / "burn" / "harmonization_params.json"
+HARMONIZATION = {
+    "version": "1.0",
+    "fit_years": [2012, 2021],            # MODIS orbits stable; inclusive
+    "n20_fit_years": [2018, 2025],
+    "snpp_period": ["2012-01-20", "2026-11-02"],
+    "noaa20_start": "2018-04-01",
+    "aqua_start": "2002-07-04",
+    "missing_rule_min_cells": 20,         # a satellite is missing on a day it reports nothing while another reports >= this many cell-days
+    "min_fit_cells_per_month": 200,       # calendar months with fewer source cell-days in the fit use the all-year factor
+    "known_gaps": [["2001-04-15", "2001-04-15"], ["2001-06-15", "2001-07-03"], ["2002-03-19", "2002-03-28"]],
+}
