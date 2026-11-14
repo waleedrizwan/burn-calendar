@@ -5,7 +5,7 @@ type: build
 priority: must
 requirement: 4. A person must be able to read it
 timebox: 2h
-status: todo
+status: in-progress
 depends: BURN-009, BURN-024
 ---
 
@@ -29,3 +29,7 @@ Extend the skeleton from BURN-024 with a map page where the user defines an area
 - [ ] The area can be cleared and redrawn
 - [ ] A date range can be picked
 - [ ] Loading and error states are shown
+
+## Outcome (Sat Nov 14)
+
+Leaflet map, rectangle (typed or dragged) and point with radius (typed or clicked), year range. **Not yet tried by hand in a browser**: only a static headless render was checked. The owner should try dragging a rectangle and clicking a point.

@@ -5,7 +5,7 @@ type: build
 priority: must
 requirement: 4. A person must be able to read it
 timebox: 2h
-status: todo
+status: in-progress
 depends: BURN-010, BURN-013, BURN-024
 ---
 
@@ -28,3 +28,7 @@ A year-by-month heatmap from the earliest year to the present, colored by harmon
 - [ ] Hover or keyboard focus shows the value
 - [ ] Row and column totals mark the highest year and the highest month
 - [ ] The partial current month is visibly marked
+
+## Outcome (Sat Nov 14)
+
+Harmonized calendar table with cividis ramp, year totals, flags. Rendered and checked in a headless screenshot.

@@ -5,7 +5,7 @@ type: build
 priority: must
 requirement: 4. A person must be able to read it
 timebox: 1h30
-status: in-progress
+status: done
 depends: BURN-001, BURN-023
 ---
 
@@ -23,7 +23,11 @@ Build the thinnest working app: a year-by-month calendar of unharmonized MODIS c
 
 ## Acceptance criteria
 
-- [ ] The app runs locally with one command
-- [ ] The calendar shows monthly MODIS counts for one region across all available years
-- [ ] The data arrives through an endpoint whose response shape is written down as the API contract
-- [ ] The view is clearly labelled as unharmonized
+- [x] The app runs locally with one command
+- [x] The calendar shows monthly MODIS counts for one region across all available years
+- [x] The data arrives through an endpoint whose response shape is written down as the API contract
+- [x] The view is clearly labelled as unharmonized
+
+## Outcome (Sat Nov 14)
+
+Superseded by the full app: `uv run uvicorn burn.app:app`; raw MODIS view remains at `/api/calendar?series=modis_raw`, labelled unharmonized.

@@ -5,7 +5,7 @@ type: build
 priority: must
 requirement: 3. The number must be answerable for any area
 timebox: 2h
-status: in-progress
+status: done
 depends: BURN-007, BURN-009
 ---
 
@@ -23,9 +23,13 @@ An endpoint that takes an area and a date range and returns monthly harmonized t
 
 ## Acceptance criteria
 
-- [ ] It accepts a bounding box or a point with radius
+- [x] It accepts a bounding box or a point with radius
 - [ ] Stretch: it accepts a polygon (GeoJSON)
-- [ ] Invalid input and oversized areas return a clear error
-- [ ] Responses meet the target set in BURN-009 for pilot areas
-- [ ] An example request and response are documented
-- [ ] An area smaller than one grid cell returns a result with a warning about precision
+- [x] Invalid input and oversized areas return a clear error
+- [x] Responses meet the target set in BURN-009 for pilot areas
+- [x] An example request and response are documented
+- [x] An area smaller than one grid cell returns a result with a warning about precision
+
+## Outcome (Sat Nov 14)
+
+`burn/analytics.py` and `burn/app.py`; contract and example in `docs/api.md`; tests in `tests/test_app.py`. Measured 60 to 90 ms per request including statistics. Polygon input (stretch) not done.

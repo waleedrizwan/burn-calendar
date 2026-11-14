@@ -5,7 +5,7 @@ type: build
 priority: must
 requirement: 4. A person must be able to read it
 timebox: 1h
-status: todo
+status: in-progress
 depends: BURN-010, BURN-016
 ---
 
@@ -28,3 +28,7 @@ Downloads for the hotspots in a search, the monthly summary, and the charts.
 - [ ] File names include the area and date range
 - [ ] Very large exports are capped with a clear message
 - [ ] Stretch: charts export as PNG
+
+## Outcome (Sat Nov 14)
+
+`/api/calendar.csv`, `/api/hotspots.csv` (500,000 row cap) and SVG download buttons on both charts. Check the remaining criteria in the task file against the running app.

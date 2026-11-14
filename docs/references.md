@@ -39,7 +39,23 @@ The exact sentence in the FIRMS FAQ ("How do I cite/acknowledge FIRMS data?") sh
 | PyArrow / Apache Parquet | Storage format | Apache-2.0 |
 | httpx | HTTP client | BSD-3-Clause |
 | python-dotenv | Reads `.env` | BSD-3-Clause |
+| NumPy | Statistics | BSD-3-Clause |
+| Leaflet 1.9.4 (vendored in `web/vendor/leaflet`, with its licence file) | Map | BSD-2-Clause |
+| Matplotlib (analysis only) | Plots in `docs/figures` | Matplotlib licence (PSF-based) |
 | pytest, ruff (development only) | Tests, linting | MIT |
+
+## Other data
+
+| Source | Used for | Terms |
+|---|---|---|
+| Natural Earth 1:10m Admin 0 countries, https://www.naturalearthdata.com/ (GeoJSON from github.com/nvkelso/natural-earth-vector) | Clipping 2026 API data to the country | Public domain |
+| OpenStreetMap standard tiles, https://www.openstreetmap.org/copyright | Map background in the app | Data ODbL; attribution shown on the map; tile usage policy applies |
+| cividis colour map (Nuñez, Anderton, Renslow 2018, PLoS ONE 13(7): e0199239) | Calendar colour ramp (ten colours sampled) | CC BY 4.0 / matplotlib |
+| ColorBrewer PuOr/RdBu classes (Brewer, colorbrewer2.org) | Anomaly colours | Apache-2.0 |
+
+## Literature
+
+See [`harmonization-options.md`](harmonization-options.md) for the papers on MODIS and VIIRS fire detection that informed the method.
 
 ## Other text sources
 

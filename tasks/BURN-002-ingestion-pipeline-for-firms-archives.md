@@ -5,7 +5,7 @@ type: build
 priority: must
 requirement: 1. The number must exist
 timebox: 1h30
-status: in-progress
+status: done
 depends: BURN-001
 ---
 
@@ -23,8 +23,12 @@ One command that downloads MODIS and VIIRS hotspots for the configured regions a
 
 ## Acceptance criteria
 
-- [ ] One command loads all sensors for the configured regions and years
-- [ ] Re-running it creates no duplicates
-- [ ] Row counts per sensor and year are logged and match the source
-- [ ] Raw files stay outside git
-- [ ] The common schema is documented
+- [x] One command loads all sensors for the configured regions and years
+- [x] Re-running it creates no duplicates
+- [x] Row counts per sensor and year are logged and match the source
+- [x] Raw files stay outside git
+- [x] The common schema is documented
+
+## Outcome (Sat Nov 14)
+
+`burn/fetch_country.py`, `burn/fetch_api.py`, `burn/ingest.py`; schema in `docs/schema.md`. History row counts are asserted equal to the source files; 2026 comes from the Area API clipped to the country. One command for everything: `uv run python -m burn.pipeline`.

@@ -5,7 +5,7 @@ type: build
 priority: must
 requirement: 4. A person must be able to read it
 timebox: 1h
-status: todo
+status: in-progress
 depends: BURN-016
 ---
 
@@ -29,3 +29,7 @@ Views that place the current period against history, using the definitions from 
 - [ ] Stretch: a chart shows yearly totals over time
 - [ ] Stretch: a seasonal profile shows the median and range by month with a selected year overlaid
 - [ ] All numbers match the API
+
+## Outcome (Sat Nov 14)
+
+Current month against history (like-for-like days), difference-from-normal calendar view, season chart with percentile bands, year totals with trend.

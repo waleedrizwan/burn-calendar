@@ -4,31 +4,120 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Burning Activity Calendar</title>
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
+<a class="skip" href="#results">Skip to results</a>
 <header>
   <h1>Burning Activity Calendar</h1>
-  <p class="sub">Satellite hotspot detections by month and year, from NASA FIRMS.</p>
+  <p class="sub">One consistent record of satellite-detected burning from November 2000 to today, harmonized across the MODIS and VIIRS sensors. Data: NASA FIRMS.</p>
 </header>
 <main>
-  <form id="controls" aria-label="Calendar options">
-    <label for="region">Region</label>
-    <select id="region"></select>
-  </form>
-  <p id="notice" class="notice" role="note" hidden></p>
-  <section aria-labelledby="cal-title">
-    <h2 id="cal-title">Loading…</h2>
-    <p id="cal-desc" class="desc"></p>
-    <div class="scroll"><table id="calendar"></table></div>
-    <div id="legend" class="legend" aria-hidden="true"></div>
-    <p id="status" class="desc" aria-live="polite"></p>
+  <section class="panel" aria-labelledby="select-title">
+    <h2 id="select-title">1. Choose an area</h2>
+    <div class="grid2">
+      <form id="controls" novalidate>
+        <div class="field">
+          <label for="region">Region</label>
+          <select id="region"></select>
+        </div>
+        <fieldset>
+          <legend>Area</legend>
+          <label class="radio"><input type="radio" name="mode" value="region" checked> Whole region</label>
+          <label class="radio"><input type="radio" name="mode" value="bbox"> Rectangle</label>
+          <label class="radio"><input type="radio" name="mode" value="circle"> Point and radius</label>
+        </fieldset>
+        <div id="bbox-fields" class="fields" hidden>
+          <div class="field"><label for="west">West (longitude)</label><input id="west" type="number" step="any" inputmode="decimal"></div>
+          <div class="field"><label for="east">East (longitude)</label><input id="east" type="number" step="any" inputmode="decimal"></div>
+          <div class="field"><label for="south">South (latitude)</label><input id="south" type="number" step="any" inputmode="decimal"></div>
+          <div class="field"><label for="north">North (latitude)</label><input id="north" type="number" step="any" inputmode="decimal"></div>
+          <p class="hint">Type the corners, or drag a rectangle on the map.</p>
+        </div>
+        <div id="circle-fields" class="fields" hidden>
+          <div class="field"><label for="lat">Latitude</label><input id="lat" type="number" step="any" inputmode="decimal"></div>
+          <div class="field"><label for="lon">Longitude</label><input id="lon" type="number" step="any" inputmode="decimal"></div>
+          <div class="field"><label for="radius">Radius (km)</label><input id="radius" type="number" step="any" min="1" max="2000" value="50" inputmode="decimal"></div>
+          <p class="hint">Type the point, or click it on the map.</p>
+        </div>
+        <div class="fields">
+          <div class="field"><label for="from-year">From year</label><select id="from-year"></select></div>
+          <div class="field"><label for="to-year">To year</label><select id="to-year"></select></div>
+        </div>
+        <button type="submit" class="primary">Show calendar</button>
+        <p id="error" class="error" role="alert" hidden></p>
+      </form>
+      <div>
+        <div id="map" role="application" aria-label="Map for choosing the area. The area can also be typed in the form."></div>
+        <p class="hint">Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.</p>
+      </div>
+    </div>
   </section>
+
+  <div id="results" tabindex="-1">
+    <p id="status" class="desc" aria-live="polite">Loading…</p>
+    <div id="warnings"></div>
+
+    <section class="panel" aria-labelledby="now-title" id="now" hidden>
+      <h2 id="now-title">This month against its history</h2>
+      <p id="now-headline" class="headline"></p>
+      <p id="now-detail" class="desc"></p>
+    </section>
+
+    <section class="panel" aria-labelledby="cal-title" id="cal" hidden>
+      <div class="row">
+        <h2 id="cal-title">Calendar</h2>
+        <fieldset class="toggle">
+          <legend class="sr">Calendar colours show</legend>
+          <label class="radio"><input type="radio" name="view" value="activity" checked> Amount of burning</label>
+          <label class="radio"><input type="radio" name="view" value="anomaly"> Difference from normal</label>
+        </fieldset>
+      </div>
+      <p id="cal-desc" class="desc"></p>
+      <div class="scroll"><table id="calendar"></table></div>
+      <div id="legend" class="legend"></div>
+      <p class="desc">† includes days seen by one MODIS satellite only (lower confidence). ‡ some days have no satellite data. Dashed outline: month not complete. <span id="prov-note"></span></p>
+    </section>
+
+    <section class="panel" aria-labelledby="season-title" id="season" hidden>
+      <div class="row"><h2 id="season-title">Season: this year against the historical range</h2>
+        <button type="button" class="link" data-svg="season-chart" data-name="season">Download chart (SVG)</button></div>
+      <div id="season-chart" class="chart"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="years-title" id="years" hidden>
+      <div class="row"><h2 id="years-title">Year totals</h2>
+        <button type="button" class="link" data-svg="years-chart" data-name="years">Download chart (SVG)</button></div>
+      <p id="trend" class="desc"></p>
+      <div id="years-chart" class="chart"></div>
+    </section>
+
+    <section class="panel" aria-labelledby="dl-title" id="downloads" hidden>
+      <h2 id="dl-title">Download</h2>
+      <p><a id="dl-monthly" class="button" href="#">Monthly table (CSV)</a></p>
+      <form id="dl-hotspots" class="fields">
+        <div class="field"><label for="hs-start">Hotspots from</label><input id="hs-start" type="date" required></div>
+        <div class="field"><label for="hs-end">to</label><input id="hs-end" type="date" required></div>
+        <button type="submit">Hotspot detections (CSV)</button>
+      </form>
+      <p class="hint">Every MODIS and VIIRS hotspot detection in the selected area and dates, with sensor, time, confidence and fire radiative power. Up to 500,000 rows per file.</p>
+      <p id="dl-error" class="error" role="alert" hidden></p>
+    </section>
+
+    <section class="panel" aria-labelledby="about-title">
+      <h2 id="about-title">What the numbers mean</h2>
+      <p><strong>Burning activity</strong> is the number of grid cells (0.1 degree, about 11 km) times days on which a satellite detected at least one vegetation-fire hotspot. One unit is one grid cell burning on one day. It measures how widespread burning was, not how intense.</p>
+      <p><strong>Harmonized</strong> means the sensor no longer matters. MODIS (1 km pixels, from 2000) and VIIRS (375 m pixels, from 2012) report very different numbers of hotspots for the same fires. Here every value is on the scale of the VIIRS S-NPP sensor: since 2012 the values come from VIIRS, and earlier years are converted from MODIS with factors measured over 2012 to 2021, when both flew. Tested on years held out from the fit, the converted MODIS record reproduces VIIRS monthly totals within 1.5 percent (Canada) and 3.5 percent (Zambia) overall.</p>
+      <p><strong>Normal</strong> is the median of the same calendar month over every complete year since 2001. A hotspot detection is a satellite pixel flagged as containing fire; it is not a count of fires. Months are in UTC. Pre-2012 values for small areas are less certain than for whole regions.</p>
+    </section>
+  </div>
 </main>
 <footer>
-  <p>Data: NASA FIRMS (Fire Information for Resource Management System), MODIS Collection 6.1 active fire detections. A hotspot detection is a satellite pixel flagged as containing fire; it is not a count of fires. Months are in UTC.</p>
-  <p>2026 NASA Space Apps Challenge, Team 347. Code written with the help of AI (Anthropic Claude).</p>
+  <p>We acknowledge the use of data from NASA's Fire Information for Resource Management System (FIRMS), part of NASA's Earth Science Data and Information System (ESDIS): MODIS Collection 6.1 and VIIRS 375 m active fire detections.</p>
+  <p>2026 NASA Space Apps Challenge, Team 347. Code written with the help of AI (Anthropic Claude). Charts are drawn from the data by code.</p>
 </footer>
+<script src="vendor/leaflet/leaflet.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
