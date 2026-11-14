@@ -12,6 +12,7 @@ from burn.config import GRID_DEG, HARMONIZED, PARAMS_FILE, REGIONS
 
 LOW_ACTIVITY = 5.0          # baseline median below this: no ratio, no category
 MAX_RADIUS_KM = 2000.0
+SMALL_AREA_ANNUAL_ERROR = {"canada": 18, "zambia": 9}  # percent, docs/validation.md "Small areas"
 UNIT = {
     "id": "viirs_equivalent_active_cell_days",
     "label": "Burning activity (VIIRS-equivalent active cell-days)",
@@ -186,6 +187,13 @@ def mann_kendall_theil_sen(years: np.ndarray, values: np.ndarray) -> dict:
 
 def calendar(region: str, area: dict, start: str | None = None, end: str | None = None) -> dict:
     df, warnings = daily_series(region, area)
+    if area["type"] != "region":
+        # docs/validation.md, "Small areas": annual error on held-out years for 2 degree blocks
+        typical = SMALL_AREA_ANNUAL_ERROR.get(region)
+        detail = f" In tests on 2 degree areas, single years were off by a median of {typical} percent." if typical else ""
+        warnings.append("Values before 2012 are converted from MODIS with factors fitted for the whole region, so for "
+                        "a smaller area they are less certain than for the region." + detail +
+                        " They also make up part of the 'normal' baseline.")
     last = df["date"].max()
     cur_y, cur_m, cur_d = last.year, last.month, last.day
     month_end = (last + pd.offsets.MonthEnd(0)).day

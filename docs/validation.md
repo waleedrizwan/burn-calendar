@@ -68,3 +68,15 @@ So for a small area the pre-2012 values are less certain than for the region, ma
 - 2026 uses the Area API clipped with Natural Earth country polygons, while earlier years use FIRMS's own per-country files, so detections right on a border or coast can differ slightly. Near real-time months have no `type`, so static sources are removed with a mask instead.
 - Cloud and smoke hide fires from every sensor; no correction is made.
 - Two regions were tested. The factors are not valid elsewhere; another region needs its own fit.
+
+## Independent review (Saturday, November 14, 12:55 p.m.)
+
+A second session re-checked the method and the pipeline without reusing the validation script.
+
+- **Pipeline recount from the raw FIRMS files**, written from scratch (distinct type 0 cell-days, times the published factors): Zambia 2015 S-NPP 267,793 (app 267,793), Canada 2019 S-NPP 16,696 (app 16,696), Canada 2004 MODIS 30,926 (app 30,926), Zambia 2008 MODIS 271,721 (app 271,720). Canada 2023 differs by 469 cell-days (0.6 percent) because S-NPP has no data on 26 July 2023 and NOAA-20 fills that day, as designed.
+- **No days without a source after 2012.** The only no-source days are the 30 known MODIS gaps before 2012.
+- **The VIIRS to MODIS ratio depends on the size of the fire year in Canada.** On shared days in 2012 to 2021 it runs from 1.70 (2021) to 2.17 (2020), with a correlation of −0.89 against log annual activity: in big years large fires already light up a cell for MODIS, so VIIRS adds fewer cells. The calendar-month factors absorb most of this. Leave-one-year-out annual errors stay between −8 and +8 percent (mean absolute 4.7 percent). A power-law fit (shared exponent about 0.8) was tested and did no better (mean 4.2 percent, wider spread), so the method is unchanged. Read single pre-2012 years in Canada as about ±8 percent.
+- **Zambia's ratio creeps up** from 2.45 (2012) to 2.64 (2021), about 0.8 percent a year. If that held before 2012, early Zambian values could read high by up to about 10 percent. Neither region shows a significant trend in the app (Canada p = 0.29, Zambia p = 0.43), so this does not create a false trend claim.
+- **The reference is stable within about ±3 percent:** S-NPP over NOAA-20 runs 0.94 to 0.99 by year, against the single factor of 0.97 to 0.98 that applies after 2 November 2026.
+
+Changes made: the app now shows a notice whenever the area is smaller than the whole region (pre-2012 values and the baseline are less certain there), and the explainer gives single-year and single-month error, not only the three-year total.
