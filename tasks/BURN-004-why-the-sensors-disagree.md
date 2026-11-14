@@ -5,7 +5,7 @@ type: research
 priority: must
 requirement: 2. The number must be comparable over time
 timebox: 45m
-status: todo
+status: done
 depends:
 ---
 
@@ -23,7 +23,11 @@ Document what makes the counts differ: pixel size (1 km versus 375 m), overpass 
 
 ## Acceptance criteria
 
-- [ ] A comparison table covers each difference and its expected effect on counts
-- [ ] A timeline shows which satellites were active in which years
-- [ ] A list of filters to apply is written, each with a justification
-- [ ] Stretch: known outages and data gaps are listed
+- [x] A comparison table covers each difference and its expected effect on counts
+- [x] A timeline shows which satellites were active in which years
+- [x] A list of filters to apply is written, each with a justification
+- [x] Stretch: known outages and data gaps are listed
+
+## Outcome (Sat Nov 14)
+
+Written in [`docs/sensor-differences.md`](../docs/sensor-differences.md). Key measured finding: Terra and Aqua overpass times are stable to 2021 and drift strongly after (Terra 10.4 h to 9.2 h, Aqua 13.7 h to 15.0 h by 2025), so MODIS after 2021 is not used for fitting or as the record.

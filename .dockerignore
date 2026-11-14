@@ -1,0 +1,7 @@
+*
+!pyproject.toml
+!uv.lock
+!burn
+!web
+!data/processed
+**/__pycache__
