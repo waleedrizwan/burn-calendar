@@ -21,3 +21,9 @@ COUNTRY_SOURCES = {
     "viirs-jpss1": ("VIIRS_NOAA20", 2018),
 }
 LAST_COUNTRY_YEAR = 2025  # newest year published as per-country files (checked 2026-11-14)
+
+# Area API sources for the current year: (API prefix, country-file folder it continues).
+API_SOURCES = {"MODIS": "modis", "VIIRS_SNPP": "viirs-snpp", "VIIRS_NOAA20": "viirs-jpss1"}
+CURRENT_YEAR = 2026
+BOUNDARIES = RAW / "boundaries" / "ne_10m_admin_0_countries.geojson"
+HOTSPOTS = PROCESSED / "hotspots"  # Parquet, partitioned region=/source=/year=

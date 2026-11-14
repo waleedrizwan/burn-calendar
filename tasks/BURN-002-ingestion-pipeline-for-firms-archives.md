@@ -5,7 +5,7 @@ type: build
 priority: must
 requirement: 1. The number must exist
 timebox: 1h30
-status: todo
+status: in-progress
 depends: BURN-001
 ---
 

@@ -5,7 +5,7 @@ type: build
 priority: must
 requirement: 4. A person must be able to read it
 timebox: 1h30
-status: todo
+status: in-progress
 depends: BURN-001, BURN-023
 ---
 

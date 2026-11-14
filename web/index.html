@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Burning Activity Calendar</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Burning Activity Calendar</h1>
+  <p class="sub">Satellite hotspot detections by month and year, from NASA FIRMS.</p>
+</header>
+<main>
+  <form id="controls" aria-label="Calendar options">
+    <label for="region">Region</label>
+    <select id="region"></select>
+  </form>
+  <p id="notice" class="notice" role="note" hidden></p>
+  <section aria-labelledby="cal-title">
+    <h2 id="cal-title">Loading…</h2>
+    <p id="cal-desc" class="desc"></p>
+    <div class="scroll"><table id="calendar"></table></div>
+    <div id="legend" class="legend" aria-hidden="true"></div>
+    <p id="status" class="desc" aria-live="polite"></p>
+  </section>
+</main>
+<footer>
+  <p>Data: NASA FIRMS (Fire Information for Resource Management System), MODIS Collection 6.1 active fire detections. A hotspot detection is a satellite pixel flagged as containing fire; it is not a count of fires. Months are in UTC.</p>
+  <p>2026 NASA Space Apps Challenge, Team 347. Code written with the help of AI (Anthropic Claude).</p>
+</footer>
+<script src="app.js"></script>
+</body>
+</html>
