@@ -5,7 +5,7 @@ type: brainstorm
 priority: must
 requirement: 4. A person must be able to read it
 timebox: 30m
-status: todo
+status: done
 depends: BURN-011
 ---
 
@@ -23,10 +23,14 @@ Define the baseline period, the summary statistic (median and percentiles), the 
 
 ## Acceptance criteria
 
-- [ ] The baseline period and statistic are defined
-- [ ] The anomaly measure is chosen and justified for skewed count data
-- [ ] Rules exist for the partial current month
-- [ ] Rules exist for areas with zero or very low activity
-- [ ] Formulas are written so that data and interface code implement the same thing
-- [ ] Month boundaries are defined as UTC or local time
-- [ ] The app's wording is fixed as 'hotspot detections', never 'fires'
+- [x] The baseline period and statistic are defined
+- [x] The anomaly measure is chosen and justified for skewed count data
+- [x] Rules exist for the partial current month
+- [x] Rules exist for areas with zero or very low activity
+- [x] Formulas are written so that data and interface code implement the same thing
+- [x] Month boundaries are defined as UTC or local time
+- [x] The app's wording is fixed as 'hotspot detections', never 'fires'
+
+## Outcome (Sat Nov 14)
+
+Written in [`docs/metrics.md`](../docs/metrics.md): whole-record baseline per calendar month, median and percentiles, percentile-rank anomaly categories, month-to-date rule, low-activity rule, UTC months, wording.

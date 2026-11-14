@@ -5,7 +5,7 @@ type: decision
 priority: must
 requirement: 3. The number must be answerable for any area
 timebox: 30m
-status: todo
+status: done
 depends: BURN-002, BURN-006
 ---
 
@@ -23,9 +23,13 @@ Measure real data size for one pilot region and extrapolate. Choose the simplest
 
 ## Acceptance criteria
 
-- [ ] Measured row counts and disk size for one pilot region are written down
-- [ ] Stretch: query timings are compared on two candidate stores
-- [ ] A short decision record in `docs/` covers data store, API, frontend framework, map library and hosting
-- [ ] The map library and the tile source are open source or freely available, and need no commercial key
-- [ ] The record states whether raw points are kept for export
-- [ ] A response-time target is set for pilot areas
+- [x] Measured row counts and disk size for one pilot region are written down
+- [x] Stretch: query timings are compared on two candidate stores
+- [x] A short decision record in `docs/` covers data store, API, frontend framework, map library and hosting
+- [x] The map library and the tile source are open source or freely available, and need no commercial key
+- [x] The record states whether raw points are kept for export
+- [x] A response-time target is set for pilot areas
+
+## Outcome (Sat Nov 14)
+
+Written in [`docs/architecture.md`](../docs/architecture.md): Parquet + DuckDB in process, raw points kept for export, FastAPI, plain JS front end, Leaflet + OpenStreetMap, Fly.io; target under 1 s for analytics.

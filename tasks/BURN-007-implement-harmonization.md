@@ -24,7 +24,11 @@ Apply the filters from BURN-004, aggregate hotspots to the common grid, fit the 
 ## Acceptance criteria
 
 - [ ] One harmonized value exists per cell and day from 2000 to the present
-- [ ] The value can be used without knowing the sensor
-- [ ] A provenance flag records which sensors contributed
-- [ ] The whole process is reproducible from one command with versioned parameters
-- [ ] The sum of gridded counts equals the filtered point counts (tested)
+- [x] The value can be used without knowing the sensor
+- [x] A provenance flag records which sensors contributed
+- [x] The whole process is reproducible from one command with versioned parameters
+- [x] The sum of gridded counts equals the filtered point counts (tested)
+
+## Outcome (Sat Nov 14)
+
+`burn/grid.py` (filters, 0.1 degree cell-days, tested sum) and `burn/harmonize.py` (fit 2012 to 2021, apply, provenance `source` column, factors in `burn/harmonization_params.json`). One command: `uv run python -m burn.pipeline`. Tests in `tests/test_harmonize.py`. **Open:** the first criterion is unticked until the 2026 download for Zambia finishes (FIRMS API rate limit) and the pipeline is re-run with `--no-fetch`.
