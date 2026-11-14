@@ -1,0 +1,23 @@
+// Cloudflare deploy (BURN-021): a Worker that forwards every request to one
+// container running the existing Dockerfile (FastAPI on port 8080, data baked in).
+// Needs the Workers Paid plan and Docker running locally. Deploy: npx wrangler deploy
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "burn-calendar",
+  "main": "worker/index.ts",
+  "compatibility_date": "2026-11-01",
+  "observability": { "enabled": true },
+  "containers": [
+    {
+      "class_name": "BurnApp",
+      "scheduling_policy": "durable_object",
+      "images": { "base": { "dockerfile": "./Dockerfile" } }
+    }
+  ],
+  "durable_objects": {
+    "bindings": [{ "name": "BURN_APP", "class_name": "BurnApp" }]
+  },
+  "exports": {
+    "BurnApp": { "type": "durable-object", "storage": "sqlite" }
+  }
+}

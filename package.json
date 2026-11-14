@@ -1,0 +1,11 @@
+{
+  "name": "burn-calendar-worker",
+  "private": true,
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "types": "wrangler types"
+  },
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}

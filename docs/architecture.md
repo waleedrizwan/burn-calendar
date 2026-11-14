@@ -23,7 +23,7 @@ Extrapolation: a country with a savanna regime costs about 20 MB of Parquet per 
 | API | **FastAPI** (Python), JSON; one process serves the API and the static front end | Same language as the pipeline; one container |
 | Front end | **Plain HTML, CSS and JavaScript, no build step.** The calendar is an HTML table; charts are inline SVG drawn by our own code | Nothing to compile or break on deploy day; tables are accessible by default |
 | Map | **Leaflet 1.9** (BSD-2-Clause) with **OpenStreetMap** standard tiles (data ODbL, attribution shown). No key | Open source, no commercial key. OSM's tile policy allows light use; a demo fits |
-| Hosting | **Fly.io**, one shared-CPU machine with 1 GB memory, data baked into the image (about 0.5 GB) | The process uses about 470 MB with the grid in memory. The `fly` CLI is installed |
+| Hosting | **Cloudflare Containers** (Workers Paid), one `basic` container (1 GiB memory) behind a Worker, data baked into the image (about 0.5 GB). Fly.io config kept as fallback | The process uses about 450 MB with the grid in memory. Owner chose Cloudflare on 2026-11-14 |
 
 ## Response-time target
 
