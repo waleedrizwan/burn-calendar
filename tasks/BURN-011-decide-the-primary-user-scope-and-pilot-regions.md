@@ -5,7 +5,7 @@ type: brainstorm
 priority: must
 requirement: 4. A person must be able to read it
 timebox: 30m
-status: todo
+status: done
 depends:
 ---
 
@@ -23,8 +23,12 @@ Choose one primary user and write their core stories. Choose pilot regions with 
 
 ## Acceptance criteria
 
-- [ ] One primary persona is described
-- [ ] Two or three user stories are written as 'As a ... I want ... so that ...'
-- [ ] Two pilot regions with contrasting fire regimes are chosen
-- [ ] The scope is stated as pilot regions only
-- [ ] An explicit out-of-scope list exists
+- [x] One primary persona is described
+- [x] Two or three user stories are written as 'As a ... I want ... so that ...'
+- [x] Two pilot regions with contrasting fire regimes are chosen
+- [x] The scope is stated as pilot regions only
+- [x] An explicit out-of-scope list exists
+
+## Outcome (Sat Nov 14)
+
+Written in [`docs/scope.md`](../docs/scope.md): persona = regional fire duty officer; pilot regions = **Canada** (boreal) and **Zambia** (savanna); scope = pilot regions only; out-of-scope list. Region definitions are in `burn/config.py`.
