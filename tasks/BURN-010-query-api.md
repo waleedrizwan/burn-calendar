@@ -5,7 +5,7 @@ type: build
 priority: must
 requirement: 3. The number must be answerable for any area
 timebox: 2h
-status: todo
+status: in-progress
 depends: BURN-007, BURN-009
 ---
 
