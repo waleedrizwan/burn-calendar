@@ -5,7 +5,7 @@ type: decision
 priority: must
 requirement: 2. The number must be comparable over time
 timebox: 30m
-status: todo
+status: done
 depends: BURN-004, BURN-005, BURN-025
 ---
 
@@ -23,11 +23,15 @@ Decide what number a calendar cell holds. Options include scaled 'MODIS-equivale
 
 ## Acceptance criteria
 
-- [ ] The decision cites the evidence from BURN-025 and lists the rejected alternatives
-- [ ] The unit has a plain-language definition that can be shown in the app
-- [ ] The grid size and time step are fixed
-- [ ] Handling is defined for the MODIS-only years, the overlap period, and the VIIRS-only future
-- [ ] Handling is defined for the early period when only one MODIS satellite was flying: corrected, flagged or excluded
-- [ ] The treatment of several VIIRS satellites flying at once is defined
-- [ ] Handling is defined for the end of S-NPP data on 2 November 2026 and the planned end of MODIS in 2027
-- [ ] Pass and fail thresholds for the validation in BURN-008 are set before the fit is run
+- [x] The decision cites the evidence from BURN-025 and lists the rejected alternatives
+- [x] The unit has a plain-language definition that can be shown in the app
+- [x] The grid size and time step are fixed
+- [x] Handling is defined for the MODIS-only years, the overlap period, and the VIIRS-only future
+- [x] Handling is defined for the early period when only one MODIS satellite was flying: corrected, flagged or excluded
+- [x] The treatment of several VIIRS satellites flying at once is defined
+- [x] Handling is defined for the end of S-NPP data on 2 November 2026 and the planned end of MODIS in 2027
+- [x] Pass and fail thresholds for the validation in BURN-008 are set before the fit is run
+
+## Outcome (Sat Nov 14)
+
+Written in [`docs/unit-decision.md`](../docs/unit-decision.md): VIIRS-equivalent active cell-days on a 0.1 degree grid per UTC day; one source satellite per day in a fixed order; thresholds for BURN-008 set before fitting.

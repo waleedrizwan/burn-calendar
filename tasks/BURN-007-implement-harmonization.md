@@ -5,7 +5,7 @@ type: build
 priority: must
 requirement: 2. The number must be comparable over time
 timebox: 2h30
-status: todo
+status: in-progress
 depends: BURN-002, BURN-006
 ---
 
