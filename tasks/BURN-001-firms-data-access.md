@@ -48,8 +48,17 @@ Sources:
 ## Acceptance criteria
 
 - [ ] The archive request for the full history of both pilot regions is submitted first, at 9:00 a.m. on Saturday, because the archive may deliver by email after a wait
-- [ ] A table lists each product with start date, end date or status, resolution, columns, and near-real-time versus standard quality
-- [ ] The access method is chosen for bulk history and for the latest data, with rate and size limits written down
-- [ ] An API key is obtained and stored outside the repo (`.env`, gitignored)
-- [ ] One year of each sensor for one region is downloaded and loads in a script
-- [ ] Citation and licence requirements are noted
+- [x] A table lists each product with start date, end date or status, resolution, columns, and near-real-time versus standard quality
+- [x] The access method is chosen for bulk history and for the latest data, with rate and size limits written down
+- [x] An API key is obtained and stored outside the repo (`.env`, gitignored)
+- [x] One year of each sensor for one region is downloaded and loads in a script
+- [x] Citation and licence requirements are noted
+
+## Outcome (Sat Nov 14, 9:06 a.m.)
+
+Written in [`docs/data-access.md`](../docs/data-access.md).
+
+- **History does not need the archive request.** FIRMS serves yearly per-country CSV files without a login (`/data/country/<source>/<year>/...`): MODIS 2000 to 2025, S-NPP 2012 to 2025, NOAA-20 2018 to 2025, standard quality with `type`. `uv run python -m burn.fetch_country` downloaded all 96 files for Canada and Zambia (3.0 GB, 36.5 million rows) in about a minute; they load in DuckDB.
+- **2026** comes from the Area API in 5-day requests (`_SP` up to its max date, `_NRT` after). The `/api/country` endpoint is not available. No NOAA-21 per-country files exist, so NOAA-21 is left out of the first version.
+- **Key:** a valid `FIRMS_MAP_KEY` (5,000 transactions per 10 minutes) is already in the project's gitignored `.env`. `~/.config/nasa-burn/.env` is still empty; code reads either.
+- **Archive request (first criterion):** being submitted by the other session at 9:01 a.m. for Canada. It is now only a backup and a cross-check, so nothing waits on it. Tick the first criterion when the "FIRMS requests (submitted by the overnight session)" entry appears in `docs/progress-log.md`. A Zambia archive request is optional.
