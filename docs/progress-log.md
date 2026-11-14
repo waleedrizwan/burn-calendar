@@ -2,9 +2,9 @@
 
 ## NEEDS YOU
 
-1. **Approve the public GitHub repository** (BURN-023, needed for the submission link). When you say yes, a session runs: `gh repo create burn-calendar --public --source . --remote origin --push`. Until then the work is committed locally only, with no remote backup.
-2. **Log in to Fly.io** for the Saturday deploy (BURN-021): run `fly auth login` in a terminal (the session has expired). Then approve the first public deploy.
-3. **Try the app by hand** (5 minutes): `uv run uvicorn burn.app:app`, open http://127.0.0.1:8000. Starting a local server was declined in the automated session, so the page was only checked as a static headless render (both calendar views and charts looked right, no script errors). Not yet tried: dragging a rectangle on the map, clicking a point, the download buttons in a real browser, a phone-width screen.
+1. **GitHub repository:** created **private** on 2026-11-14 at owner's request (`waleedrizwan/burn-calendar`) and pushed. The rules need the final project link to open without a login, so make it public before submitting (BURN-026): `gh repo edit waleedrizwan/burn-calendar --visibility public --accept-visibility-change-consequences`.
+2. **Cloudflare deploy (BURN-021):** hosting switched from Fly.io to Cloudflare Containers at owner's request. Config is in `wrangler.jsonc` and `worker/index.ts`, and the image was tested locally. `npx wrangler deploy` failed with 401 on the Containers API, because the existing Wrangler login has no Containers permission or the account is not on Workers Paid. To fix it: make sure the account has Workers Paid ($5/month), run `npx wrangler login` again to re-authorize, then `npx wrangler deploy`.
+3. **App checked by hand (12:45 p.m.):** calendar, rectangle drawn on the map, point mode, both CSV downloads, and phone width all work. Minor: if the browser window is resized after the page loads, the map can show the wrong area until the page is reloaded.
 4. **FIRMS archive emails** (low priority now): history for both pilot regions was downloaded another way (see 09:06 below), so the Archive Download request is only a backup. If the "data ready" email arrives, save the zip into `data/raw/archive/`. No Zambia request is needed.
 5. **FIRMS MAP_KEY:** nothing to do. A valid key is already in the project's gitignored `.env`. If the 9:01 request emails you a new key, either works; optionally paste it into `~/.config/nasa-burn/.env`.
 
@@ -38,3 +38,4 @@
 - **Not verified:** the Docker image has not been built. The 2026 clip (Natural Earth polygon) was not cross-checked against a FIRMS per-country file. NOAA-21 is not used.
 - **Still no** "FIRMS requests (submitted by the overnight session)" entry in this file as of 09:27, so the first criterion of BURN-001 is unticked and BURN-001 stays `in-progress`.
 - **Next session:** after the owner's checks, tick BURN-015 to 018, deploy (BURN-021), then BURN-019, BURN-022, BURN-026.
+- **Sat 12:40 to 12:55** (the original setup session): the 9:01 FIRMS submission never ran (session restarted overnight); the archive form is still unsubmitted in Chrome and is no longer needed. App checked by hand. Private GitHub repo created and pushed. Cloudflare Containers deploy added; first deploy blocked by a 401 (see NEEDS YOU 2).
