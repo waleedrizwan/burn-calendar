@@ -1,0 +1,22 @@
+# secrets
+.env
+.env.*
+!.env.example
+
+# data (raw FIRMS archives and derived files stay out of git)
+data/
+*.zip
+*.parquet
+*.duckdb
+
+# python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+
+# misc
+.DS_Store
+.claude/
+node_modules/

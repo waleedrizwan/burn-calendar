@@ -1,0 +1,1 @@
+"""Harmonized Burning Activity Calendar."""
